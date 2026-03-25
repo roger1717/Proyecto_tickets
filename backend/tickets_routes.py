@@ -21,7 +21,7 @@ def get_tickets(db: Session = Depends(get_db)):
 
 @router.post("/tickets",response_model=TicketResponse) # CREAR
 def post_tickets(ticket: TicketCreate, db: Session = Depends(get_db)):
-    new_ticket = ticket(**Ticket.model_dump(),estado="abierto")
+    new_ticket = Ticket(**ticket.model_dump(),estado="abierto")
 
     db.add(new_ticket)
     db.commit()
