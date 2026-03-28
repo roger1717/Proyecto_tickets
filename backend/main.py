@@ -1,10 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from tickets_routes import router
-
+from ticket_routes import router
+from database import engine, Base
+import models
 # Puerta de entrada a la API , Lo ejecuta FastAPI directamente 
 
 app = FastAPI()
+
+# Crear las tablas automaticamente al arrancar
+Base.metadata.create_all(bind=engine)
 
 origins = ["http://localhost:5173"]
 
